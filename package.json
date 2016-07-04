@@ -1,0 +1,22 @@
+{
+  "name": "github-user-language-stats",
+  "version": "1.0.0",
+  "description": "Show GitHub user's programming language stats",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morishin/github-user-language-stats.git"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "gh-lang-stat": "gh-lang-stat.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shintaro Morikawa",
+  "license": "MIT",
+  "dependencies": {
+    "ascii-horizontal-barchart": "^1.1.0",
+    "axios": "^0.12.0"
+  }
+}
