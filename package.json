@@ -1,6 +1,6 @@
 {
   "name": "github-user-language-stats",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Show GitHub user's programming language stats",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "preferGlobal": true,
   "bin": {
-    "gh-lang-stat": "gh-lang-stat.js"
+    "gh-lang-stat": "bin/gh-lang-stat.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,16 @@
   "author": "Shintaro Morikawa",
   "license": "MIT",
   "dependencies": {
-    "ascii-horizontal-barchart": "^1.2.0",
+    "ascii-horizontal-barchart": "^1.3.0",
     "axios": "^0.12.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0"
+  },
+  "scripts": {
+    "compile": "babel -d bin/ src/",
+    "prepublish": "npm run compile"
   }
 }

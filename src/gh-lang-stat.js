@@ -4,17 +4,17 @@
 
 const access_token = process.env.GITHUB_API_ACCESS_TOKEN;
 
-if (process.argv.length < 3 || ['-h', '--help'].includes(process.argv[2]) ) {
-  const commandName = process.argv[1].split('/').slice(-1)[0]
+if (process.argv.length < 3 || ['-h', '--help'].indexOf(process.argv[2]) !== -1 ) {
+  const commandName = process.argv[1].split('/').slice(-1)[0];
   console.log(`usage: GITHUB_API_ACCESS_TOKEN=<your token> ${commandName} <github username>`);
-  return;
+  process.exit(1);
 }
 
 const username = process.argv[2]
 
 let config = {};
 if (access_token === undefined) {
-  console.log('Recommended: Set GITHUB_API_ACCESS_TOKEN for API rate limit')
+  console.log('Recommended: Set GITHUB_API_ACCESS_TOKEN for API rate limit');
 } else {
   config = {
     headers: {'Authorization': `token ${access_token}`}
@@ -31,7 +31,7 @@ axios.get(`https://api.github.com/users/${username}/repos`, config)
       Object.keys(previous).forEach(key => current[key] = (current[key] || 0) + previous[key]);
       return current;
     }, {});
-    const chart = require('ascii-horizontal-barchart')
+    const chart = require('ascii-horizontal-barchart');
     console.log(chart(all_repo_stats, true));
   })
   .catch(error => {
