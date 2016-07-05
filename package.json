@@ -1,6 +1,6 @@
 {
   "name": "github-user-language-stats",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Show GitHub user's programming language stats",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   "author": "Shintaro Morikawa",
   "license": "MIT",
   "dependencies": {
-    "ascii-horizontal-barchart": "^1.1.0",
+    "ascii-horizontal-barchart": "^1.2.0",
     "axios": "^0.12.0"
   }
 }
