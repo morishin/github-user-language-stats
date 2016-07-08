@@ -4,10 +4,10 @@
 
 const access_token = process.env.GITHUB_API_ACCESS_TOKEN;
 
-if (process.argv.length < 3 || ['-h', '--help'].indexOf(process.argv[2]) !== -1 ) {
+if (process.argv.length < 3 || ['-h', '--help'].indexOf(process.argv[2]) !== -1) {
   const commandName = process.argv[1].split('/').slice(-1)[0];
   console.log(`usage: GITHUB_API_ACCESS_TOKEN=<your token> ${commandName} <github username>`);
-  process.exit(1);
+  process.exit(process.argv.length < 3 ? 1 : 0);
 }
 
 const username = process.argv[2]
@@ -24,7 +24,7 @@ if (access_token === undefined) {
 const axios = require('axios');
 axios.get(`https://api.github.com/users/${username}/repos`, config)
   .then(repos => {
-    return axios.all(repos.data.map(repo => axios.get(repo.languages_url, config)));
+    return axios.all(repos.data.filter(repo => !repo.fork).map(repo => axios.get(repo.languages_url, config)));
   })
   .then(repo_stats => {
     const all_repo_stats = repo_stats.map(stat => stat.data).reduce((previous, current) => {
