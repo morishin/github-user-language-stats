@@ -21,8 +21,16 @@ if (access_token === undefined) {
   };
 }
 
+const baseURL = 'https://api.github.com'
 const axios = require('axios');
-axios.get(`https://api.github.com/users/${username}/repos`, config)
+axios.get(`${baseURL}/user`, config)
+  .then(user => {
+    if (user.data.login === username) {
+      return axios.get(`${baseURL}/user/repos`, config);
+    } else {
+      return axios.get(`${baseURL}/users/${username}/repos`, config);
+    }
+  })
   .then(repos => {
     return axios.all(repos.data.filter(repo => !repo.fork).map(repo => axios.get(repo.languages_url, config)));
   })
